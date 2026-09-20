@@ -1,0 +1,376 @@
+# React — JSX Rules & Components as Functions
+
+## 1. JSX kya hai?
+
+JSX ka matlab hai **JavaScript XML**.
+
+React mein JSX ki help se hum JavaScript file ke andar HTML jaisa syntax likh sakte hain.
+
+```jsx
+function App() {
+  return (
+    <div>
+      <h1>Hello Abdullah</h1>
+      <p>I am learning React</p>
+    </div>
+  );
+}
+```
+
+JSX HTML jaisa dikhta hai, lekin ye JavaScript ke andar use hota hai.
+
+---
+
+## 2. JSX Rules
+
+### Rule 1 — One Parent Element
+
+Component ke `return` mein elements ko ek parent ke andar rakhna hota hai.
+
+❌ Wrong:
+
+```jsx
+function App() {
+  return (
+    <h1>Hello</h1>
+    <p>Welcome</p>
+  );
+}
+```
+
+✅ Correct:
+
+```jsx
+function App() {
+  return (
+    <div>
+      <h1>Hello</h1>
+      <p>Welcome</p>
+    </div>
+  );
+}
+```
+
+---
+
+### Rule 2 — `className` instead of `class`
+
+HTML:
+
+```html
+<div class="container">
+```
+
+React JSX:
+
+```jsx
+<div className="container">
+```
+
+React mein CSS classes ke liye `className` use hota hai.
+
+---
+
+### Rule 3 — JavaScript inside `{}`
+
+JSX ke andar JavaScript value use karne ke liye `{}` use karte hain.
+
+```jsx
+function App() {
+  const name = "Abdullah";
+
+  return <h1>Hello {name}</h1>;
+}
+```
+
+Output:
+
+```text
+Hello Abdullah
+```
+
+---
+
+### Rule 4 — Self-closing Tags
+
+JSX mein self-closing elements ko `/` ke saath close karna hota hai.
+
+```jsx
+<img src="image.jpg" />
+```
+
+```jsx
+<input type="text" />
+```
+
+```jsx
+<br />
+```
+
+---
+
+## 3. Components kya hain?
+
+React application ko small reusable parts mein divide kiya jata hai.
+
+In parts ko **Components** kehte hain.
+
+Example:
+
+```jsx
+function Navbar() {
+  return <nav>My Website</nav>;
+}
+```
+
+Yahan `Navbar` ek React component hai.
+
+---
+
+## 4. Components as Functions
+
+React mein component ek JavaScript function hota hai jo JSX return karta hai.
+
+```jsx
+function Welcome() {
+  return <h1>Welcome to React</h1>;
+}
+```
+
+Component ko doosre component mein use kar sakte hain:
+
+```jsx
+function App() {
+  return (
+    <div>
+      <Welcome />
+    </div>
+  );
+}
+```
+
+`<Welcome />` component ko render karta hai.
+
+---
+
+## 5. Component Naming Rule
+
+React components ka naam **Capital letter** se start karna chahiye.
+
+✅ Correct:
+
+```jsx
+function Navbar() {
+  return <nav>Navbar</nav>;
+}
+```
+
+```jsx
+function UserCard() {
+  return <div>User Card</div>;
+}
+```
+
+❌ Avoid:
+
+```jsx
+function navbar() {
+  return <nav>Navbar</nav>;
+}
+```
+
+### Rule:
+
+> React Component → Capital letter se start.
+
+---
+
+## 6. Import and Export
+
+Agar component ko doosri file mein use karna ho to usay export karte hain.
+
+### Navbar.jsx
+
+```jsx
+function Navbar() {
+  return <nav>My Website</nav>;
+}
+
+export default Navbar;
+```
+
+### App.jsx
+
+```jsx
+import Navbar from "./components/Navbar";
+
+function App() {
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+## 7. Real-World Component Structure
+
+Ek real website ko multiple components mein divide kiya ja sakta hai:
+
+```text
+App
+├── Navbar
+├── Hero
+├── Services
+├── Portfolio
+└── Footer
+```
+
+Example:
+
+```jsx
+function App() {
+  return (
+    <div>
+      <Navbar />
+      <Hero />
+      <Services />
+      <Portfolio />
+      <Footer />
+    </div>
+  );
+}
+```
+
+Is approach se code:
+
+* reusable hota hai
+* organized hota hai
+* maintain karna easy hota hai
+* large applications manage karna easy hota hai
+
+---
+
+## 8. Recommended Folder Structure
+
+```text
+src/
+├── components/
+│   ├── Navbar.jsx
+│   ├── Hero.jsx
+│   ├── Services.jsx
+│   └── Footer.jsx
+│
+├── App.jsx
+├── main.jsx
+└── index.css
+```
+
+### `components/`
+
+Reusable React components ke liye.
+
+### `App.jsx`
+
+Main application component.
+
+### `main.jsx`
+
+React application ko browser ke DOM se connect karta hai.
+
+---
+
+## 9. Complete Example
+
+### Navbar.jsx
+
+```jsx
+function Navbar() {
+  return (
+    <nav>
+      <h1>My Website</h1>
+
+      <div>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </div>
+    </nav>
+  );
+}
+
+export default Navbar;
+```
+
+### App.jsx
+
+```jsx
+import Navbar from "./components/Navbar";
+
+function App() {
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+## 10. Important Points
+
+* JSX = JavaScript XML
+* JSX HTML jaisa syntax provide karta hai
+* JSX mein `class` ki jagah `className` use hota hai
+* JavaScript values `{}` ke andar likhte hain
+* Self-closing tags ko properly close karna hota hai
+* React components usually functions hote hain
+* Components JSX return karte hain
+* Component names Capital letter se start hote hain
+* Components ko `<Component />` ki tarah render karte hain
+* `export default` component ko doosri file mein use karne deta hai
+* `import` component ko doosri file se laata hai
+* Large React applications ko reusable components mein divide kiya jata hai
+
+---
+
+## Practice
+
+Create these components:
+
+```text
+components/
+├── Header.jsx
+├── Student.jsx
+├── Course.jsx
+└── Footer.jsx
+```
+
+Aur `App.jsx` mein:
+
+```jsx
+<Header />
+<Student />
+<Course />
+<Footer />
+```
+
+use karo.
+
+### Concepts Practiced
+
+* JSX
+* Components
+* Functions
+* `return`
+* `import`
+* `export default`
+* Component rendering
+* Folder structure
