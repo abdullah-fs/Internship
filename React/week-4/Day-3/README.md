@@ -1,16 +1,108 @@
-# React + Vite
+# React `useState` — Reading and Updating State
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+`useState` is a React Hook used to **store and update data** inside a component.
 
-Currently, two official plugins are available:
+## Syntax
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```jsx
+const [state, setState] = useState(initialValue);
+```
 
-## React Compiler
+* `state` → current value
+* `setState` → updates the value
+* `initialValue` → starting value
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Reading State
 
-## Expanding the ESLint configuration
+State ki current value directly use karte hain:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```jsx
+<h1>Count: {count}</h1>
+```
+
+## Updating State
+
+State update karne ke liye setter function use karte hain:
+
+```jsx
+setCount(count + 1);
+```
+
+❌ Direct state update nahi karni:
+
+```jsx
+count = count + 1;
+```
+
+✅ Setter use karo:
+
+```jsx
+setCount(count + 1);
+```
+
+## Example — Counter
+
+```jsx
+import { useState } from "react";
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+
+      <button onClick={() => setCount(count + 1)}>
+        Increase
+      </button>
+
+      <button onClick={() => setCount(count - 1)}>
+        Decrease
+      </button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+### Example Explanation
+
+```jsx
+const [count, setCount] = useState(0);
+```
+
+* `count` → current state
+* `setCount` → state update function
+* `0` → initial value
+
+```jsx
+setCount(count + 1);
+```
+
+Button click hone par count `1` se increase hota hai.
+
+```jsx
+setCount(count - 1);
+```
+
+Button click hone par count `1` se decrease hota hai.
+
+## Common State Types
+
+```jsx
+const [name, setName] = useState("");
+const [age, setAge] = useState(21);
+const [isLoggedIn, setIsLoggedIn] = useState(false);
+const [users, setUsers] = useState([]);
+```
+
+## Important Pattern
+
+```text
+useState()  → Create state
+state       → Read state
+setState()  → Update state
+```
+
+When state changes, React **re-renders the component** and updates the UI.
